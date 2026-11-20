@@ -2,29 +2,43 @@
 """Compose the news-image-20261120 front page: "The World in One Day —
 Friday 20 November 2026".
 
+v2 (this session): every story re-verified against live reporting and
+four errors fixed — Akvan evacuation count (nearly 300,000, not "tens
+of thousands"), GTA VI sales (19.1m, not 19.05m), Sensex (+990 / Nifty
+25,514 on Thursday, not +700 / 25,400), and the cricket + Anthropic
+briefs refreshed to the latest verified figures (day-two lunch, debut
+close +17%). Han deck now says the term was overturned "in part";
+ICJ deck adds the 9-6 vote; Gas Husky brief names the ship. Briefs
+font bumped 15 -> 16pt for 300px legibility.
+
 Stories (all verified against reputable reporting before they were drawn):
   hero  Cyclone Akvan makes landfall near Gopalpur, Odisha, at noon IST,
-        winds 90-100 km/h gusting 110; tens of thousands evacuated (IMD).
-  GTA   Sensor Tower: 19.05m copies, about $1.84bn on day one; 7.9m peak
-        concurrent viewers; Rockstar has released no official figures
-        (Reuters, 19 Nov).
+        winds 90-100 km/h gusting 110; nearly 300,000 evacuated (IMD /
+        Odisha SRC, 298,676 by Thursday evening).
+  GTA   Sensor Tower: 19.1m copies, about $1.84bn on day one; record
+        7.9m peak concurrent viewers (Streams Charts); Rockstar has
+        released no official figures (Reuters, 19 Nov).
   ICJ   The Hague finds Myanmar committed genocide against the Rohingya
-        in 2017 — the first state ever held guilty; reparations ordered
-        (CNN / Le Monde, 19 Nov).
-  Han   South Korea's top court overturns ex-PM Han Duck-soo's 15-year
-        term over the 2024 martial-law bid, orders a retrial; detention
-        extended two months (19 Nov).
+        in 2017 — the first state ever held guilty, by 9 votes to 6;
+        reparations ordered (CNN / Le Monde, 19 Nov).
+  Han   South Korea's top court overturns in part ex-PM Han Duck-soo's
+        15-year term over the 2024 martial-law bid, orders a retrial;
+        detention extended two months (Reuters, 19 Nov).
   Ven   Hegseth signs a US-Venezuela military-cooperation deal in Caracas
         — joint training, intelligence sharing — 10 months after the
         capture of Nicolas Maduro (CNN / AP, 18 Nov).
   Yong   IAEA chief Grossi tells the Board of Governors that North Korea
-        finished another extension to its Yongbyon enrichment plant;
+        built another extension to its Yongbyon enrichment plant;
         weapons-grade output keeps growing (Reuters, 18 Nov).
-  Briefs: Fiji state of disaster (Reuters), Sensex +700 / Nifty past
-        25,400, Anthropic valued at $1.5tn after its $83 Nasdaq debut,
-        Nicholls 113* as NZ reach 243-5 in Wellington, Modi meets the
-        Prince and Princess of Wales in New Delhi, Australia sanctions
-        Israeli settlers, LPG tanker off Bulgaria hit by projectiles.
+  Briefs: Fiji state of disaster (Reuters, 18 Nov), Sensex +990 /
+        Nifty 25,514 on Thursday (PTI, 19 Nov), Anthropic shares close
+        at $97, +17% on debut after $83 IPO pricing (Reuters, 19 Nov),
+        Nicholls 146* / Phillips 118 as NZ reach 317-6 at lunch, day
+        two in Wellington (AP, 20 Nov), Modi meets the Prince and
+        Princess of Wales in New Delhi (18 Nov), Australia sanctions
+        Israeli settlers (Reuters, 18 Nov), LPG tanker Gas Husky hit by
+        four projectiles off Bulgaria, all 19 crew saved (Reuters,
+        18 Nov).
 
 Deterministic: fixed seed, no timestamps, JPEG q92, no EXIF. Running
 this script twice produces identical bytes. Writes entry.png next to it.
@@ -361,7 +375,7 @@ def main():
     d.text((24, 248), "AKVAN MAKES", font=fnt(SERIF_B, 44), fill=INK)
     d.text((24, 294), "LANDFALL", font=fnt(SERIF_B, 44), fill=INK)
     deck = ("Severe Cyclonic Storm Akvan comes ashore near Gopalpur at "
-            "noon, winds of 100 km/h; tens of thousands evacuated as "
+            "noon, winds of 100 km/h; nearly 300,000 evacuated as "
             "heavy rain lashes the coast.")
     y = 344
     for line in wrap(d, deck, fnt(SANS, 19), 976):
@@ -372,12 +386,13 @@ def main():
     # ---- row 2: two tiles ----
     row2 = [
         ("CULTURE · GAMING", "GTA VI: 19M COPIES", "ON DAY ONE",
-         "Sensor Tower puts day-one sales at 19.05m copies, about $1.84bn; "
-         "7.9m watch at once. Rockstar silent on official figures.",
+         "Sensor Tower puts day-one sales at 19.1m copies, about $1.84bn; "
+         "a record 7.9m watch at once. Rockstar silent on official figures.",
          neon_city),
         ("THE HAGUE · JUSTICE", "COURT: MYANMAR", "GUILTY OF GENOCIDE",
          "The Hague finds Myanmar committed genocide against the Rohingya "
-         "in 2017 — the first state ever held guilty. Reparations ordered.",
+         "— first state ever held guilty, 9 votes to 6. "
+         "Reparations ordered.",
          scales_art),
     ]
     for i, (kick, h1, h2, deck, art) in enumerate(row2):
@@ -390,15 +405,15 @@ def main():
     # ---- row 3: three tiles ----
     row3 = [
         ("SOUTH KOREA · POLITICS", "EX-PM'S 15-YEAR TERM", "OVERTURNED",
-         "Top court overturns Han Duck-soo's 15-year term over the "
-         "martial-law bid; retrial ordered.",
+         "Top court overturns Han Duck-soo's 15-year term in part over "
+         "the martial-law bid; retrial ordered.",
          court_art),
         ("VENEZUELA · DEFENCE", "US AND VENEZUELA", "SIGN MILITARY PACT",
          "Hegseth signs a Caracas deal restoring defence ties — training "
          "and intelligence sharing.",
          flags_art),
         ("NORTH KOREA · NUCLEAR", "NORTH KOREA BUILDS", "MORE OF YONGBYON",
-         "UN watchdog says Pyongyang finished another extension to its "
+         "UN watchdog says Pyongyang built another extension to its "
          "Yongbyon enrichment plant.",
          reactor_art),
     ]
@@ -414,18 +429,18 @@ def main():
     d.text((24, 906), "ALSO FRIDAY", font=fnt(SANS_B, 19), fill=GOLD)
     briefs = [
         "FIJI DECLARES DISASTER — El Niño drought at crisis level",
-        "SENSEX JUMPS 700 — Nifty crosses 25,400 in Thursday rally",
-        "ANTHROPIC AT $1.5TN — valued at $1.5tn after Nasdaq debut",
-        "NICHOLLS 113* — New Zealand 243-5 on day one in Wellington",
-        "MODI MEETS THE WALESSES — royals in New Delhi for India-UK talks",
-        "AUSTRALIA SANCTIONS SETTLERS — over West Bank expansion",
-        "TANKER HIT IN BLACK SEA — LPG tanker struck by projectiles",
+        "SENSEX JUMPS 990 — Nifty closes above 25,500 Thursday",
+        "ANTHROPIC +17% ON DEBUT — $97 close after $83 IPO",
+        "NICHOLLS 146* — Phillips 118, NZ 317-6 at lunch, day two",
+        "MODI MEETS THE WALESSES — royals in Delhi for India-UK talks",
+        "AUSTRALIA SANCTIONS SETTLERS — West Bank expansion",
+        "GAS HUSKY SINKS — four strikes; all 19 crew saved",
     ]
     for i, b in enumerate(briefs):
         col = 0 if i < 4 else 1
         row = i if i < 4 else i - 4
-        d.text((24 + col * 500, 928 + row * 17), "•  " + b,
-               font=fnt(SANS, 15), fill=(235, 235, 235))
+        d.text((24 + col * 500, 928 + row * 18), "•  " + b,
+               font=fnt(SANS, 16), fill=(235, 235, 235))
 
     img = grain(img)
     img.save(HERE / "entry.png", "JPEG", quality=92)

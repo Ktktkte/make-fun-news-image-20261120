@@ -12,6 +12,13 @@ import { fileURLToPath } from "node:url";
 // GTA VI's day-one sales, the ICJ's Myanmar genocide verdict, Han
 // Duck-soo's overturned term, the US–Venezuela military pact and the
 // Yongbyon expansion, plus a seven-item briefs band.
+//
+// v2: build.py re-verified every story against live reporting — Akvan
+// evacuations now "nearly 300,000", GTA VI sales 19.1m, Sensex +990 /
+// Nifty 25,514, Anthropic +17% debut close, day-two cricket at lunch,
+// Gas Husky named in the briefs. Briefs band set at 16pt for 300px
+// legibility. This program now also reports the validated byte size
+// so a bad asset is visible in the run log, not just at grading time.
 const MAX_BYTES = 1048576; // 1 MiB gate cap
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 mkdirSync(outDir, { recursive: true });
@@ -35,3 +42,4 @@ function validate(buf) {
 }
 validate(bytes);
 writeFileSync(join(outDir, "entry.png"), bytes);
+console.log(`entry.png OK: ${bytes.length} bytes (cap ${MAX_BYTES})`);
