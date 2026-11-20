@@ -2,25 +2,33 @@
 """Compose the news-image-20261120 front page: "The World in One Day —
 Friday 20 November 2026".
 
-v2 (this session): every story re-verified against live reporting and
-four errors fixed — Akvan evacuation count (nearly 300,000, not "tens
-of thousands"), GTA VI sales (19.1m, not 19.05m), Sensex (+990 / Nifty
-25,514 on Thursday, not +700 / 25,400), and the cricket + Anthropic
-briefs refreshed to the latest verified figures (day-two lunch, debut
-close +17%). Han deck now says the term was overturned "in part";
-ICJ deck adds the 9-6 vote; Gas Husky brief names the ship. Briefs
-font bumped 15 -> 16pt for 300px legibility.
+v3 (this session): re-verified every story against live reporting and
+fixed what the day's fuller reporting changed — Akvan's landfall was in
+the MORNING (07:30-08:30 IST), not noon, with winds 70-80 km/h gusting
+90 at landfall, and more than 300,000 evacuated with no deaths reported;
+GTA VI's full launch-day tally is 24.6m copies / about $2.36bn (Sensor
+Tower, end of launch day), not the Thursday-morning 19.1m / $1.84bn;
+cricket refreshed to stumps (Nicholls 175*, NZ 368; India 159-1).
+Two major stories v2 missed are added: the first-ever Trump-Xi-Putin
+three-way summit in Shenzhen (19 Nov, four-point "peace declaration")
+and the Houthi missile strike on Riyadh's PIF Tower (19 Nov, no
+injuries). The soft royals brief is swapped out for the Houthi strike.
+ICJ deck adds Myanmar calling the ruling "unfair" on Friday. Briefs
+stay 16pt; an 8th brief fits the band's second column.
 
 Stories (all verified against reputable reporting before they were drawn):
-  hero  Cyclone Akvan makes landfall near Gopalpur, Odisha, at noon IST,
-        winds 90-100 km/h gusting 110; nearly 300,000 evacuated (IMD /
-        Odisha SRC, 298,676 by Thursday evening).
-  GTA   Sensor Tower: 19.1m copies, about $1.84bn on day one; record
-        7.9m peak concurrent viewers (Streams Charts); Rockstar has
-        released no official figures (Reuters, 19 Nov).
+  hero  Cyclone Akvan makes landfall near Gopalpur, Odisha, in the
+        morning (07:30-08:30 IST), winds 70-80 km/h gusting 90; more
+        than 300,000 evacuated (Odisha officials, 20 Nov), no deaths
+        or major damage reported (IMD / PTI / The Hindu BusinessLine).
+  GTA   Sensor Tower: 24.6m copies, about $2.36bn by the end of launch
+        day (19 Nov); record 7.9m peak concurrent viewers (Streams
+        Charts); Rockstar has released no official figures (Reuters /
+        Notebookcheck, 20 Nov).
   ICJ   The Hague finds Myanmar committed genocide against the Rohingya
         in 2017 — the first state ever held guilty, by 9 votes to 6;
-        reparations ordered (CNN / Le Monde, 19 Nov).
+        reparations ordered; Myanmar calls the ruling "unfair" on
+        Friday (CNN / Le Monde, 19-20 Nov).
   Han   South Korea's top court overturns in part ex-PM Han Duck-soo's
         15-year term over the 2024 martial-law bid, orders a retrial;
         detention extended two months (Reuters, 19 Nov).
@@ -33,12 +41,14 @@ Stories (all verified against reputable reporting before they were drawn):
   Briefs: Fiji state of disaster (Reuters, 18 Nov), Sensex +990 /
         Nifty 25,514 on Thursday (PTI, 19 Nov), Anthropic shares close
         at $97, +17% on debut after $83 IPO pricing (Reuters, 19 Nov),
-        Nicholls 146* / Phillips 118 as NZ reach 317-6 at lunch, day
-        two in Wellington (AP, 20 Nov), Modi meets the Prince and
-        Princess of Wales in New Delhi (18 Nov), Australia sanctions
-        Israeli settlers (Reuters, 18 Nov), LPG tanker Gas Husky hit by
-        four projectiles off Bulgaria, all 19 crew saved (Reuters,
-        18 Nov).
+        Nicholls 175* as NZ make 368, India 159-1 at stumps, day two
+        in Wellington (AP / Reuters, 20 Nov), Houthi missile hits
+        Riyadh's PIF Tower, 80 storeys, no injuries (WSJ / Reuters,
+        19 Nov), Australia sanctions Israeli settlers (Reuters,
+        18 Nov), LPG tanker Gas Husky hit by four projectiles off
+        Bulgaria, all 19 crew saved (Reuters, 18 Nov), Trump, Xi and
+        Putin hold first three-way summit in Shenzhen, four-point
+        "peace declaration" (WSJ / Reuters, 19 Nov).
 
 Deterministic: fixed seed, no timestamps, JPEG q92, no EXIF. Running
 this script twice produces identical bytes. Writes entry.png next to it.
@@ -374,9 +384,9 @@ def main():
     d = ImageDraw.Draw(img)
     d.text((24, 248), "AKVAN MAKES", font=fnt(SERIF_B, 44), fill=INK)
     d.text((24, 294), "LANDFALL", font=fnt(SERIF_B, 44), fill=INK)
-    deck = ("Severe Cyclonic Storm Akvan comes ashore near Gopalpur at "
-            "noon, winds of 100 km/h; nearly 300,000 evacuated as "
-            "heavy rain lashes the coast.")
+    deck = ("Severe Cyclonic Storm Akvan comes ashore near Gopalpur in "
+            "the morning, winds of 70-80 km/h; more than 300,000 "
+            "evacuated, no deaths reported as heavy rain lashes the coast.")
     y = 344
     for line in wrap(d, deck, fnt(SANS, 19), 976):
         d.text((24, y), line, font=fnt(SANS, 19), fill=BODY)
@@ -385,14 +395,15 @@ def main():
 
     # ---- row 2: two tiles ----
     row2 = [
-        ("CULTURE · GAMING", "GTA VI: 19M COPIES", "ON DAY ONE",
-         "Sensor Tower puts day-one sales at 19.1m copies, about $1.84bn; "
-         "a record 7.9m watch at once. Rockstar silent on official figures.",
+        ("CULTURE · GAMING", "GTA VI: 24.6M COPIES", "ON DAY ONE",
+         "Sensor Tower puts full launch-day sales at 24.6m copies, "
+         "about $2.36bn; a record 7.9m watch at once. Rockstar silent "
+         "on official figures.",
          neon_city),
         ("THE HAGUE · JUSTICE", "COURT: MYANMAR", "GUILTY OF GENOCIDE",
-         "The Hague finds Myanmar committed genocide against the Rohingya "
-         "— first state ever held guilty, 9 votes to 6. "
-         "Reparations ordered.",
+         "The Hague finds Myanmar guilty of genocide against the "
+         "Rohingya — a first for any state, 9 votes to 6. Myanmar "
+         "calls it 'unfair'; reparations ordered.",
          scales_art),
     ]
     for i, (kick, h1, h2, deck, art) in enumerate(row2):
@@ -431,10 +442,11 @@ def main():
         "FIJI DECLARES DISASTER — El Niño drought at crisis level",
         "SENSEX JUMPS 990 — Nifty closes above 25,500 Thursday",
         "ANTHROPIC +17% ON DEBUT — $97 close after $83 IPO",
-        "NICHOLLS 146* — Phillips 118, NZ 317-6 at lunch, day two",
-        "MODI MEETS THE WALESSES — royals in Delhi for India-UK talks",
+        "NICHOLLS 175* — NZ 368; India 159-1 at stumps",
+        "HOUTHI MISSILE HITS RIYADH — PIF Tower hit, no injuries",
         "AUSTRALIA SANCTIONS SETTLERS — West Bank expansion",
         "GAS HUSKY SINKS — four strikes; all 19 crew saved",
+        "TRUMP, XI, PUTIN MEET — first three-way summit in Shenzhen",
     ]
     for i, b in enumerate(briefs):
         col = 0 if i < 4 else 1
