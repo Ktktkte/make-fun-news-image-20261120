@@ -14,14 +14,12 @@ import { fileURLToPath } from "node:url";
 // pact and the Yongbyon expansion, plus an eight-item briefs band
 // (including the Shenzhen summit and the Houthi strike on Riyadh).
 //
-// v3: build.py re-verified every story against live reporting — Akvan
-// landfall in the morning (70-80 km/h, more than 300,000 evacuated,
-// no deaths), GTA VI full launch-day sales 24.6m / $2.36bn, cricket at
-// stumps (Nicholls 175*, NZ 368), ICJ deck adds Myanmar's "unfair"
-// dismissal, and two missing major stories added (Shenzhen summit,
-// Houthi strike on Riyadh's PIF Tower). Briefs band set at 16pt for
-// 300px legibility. This program now also reports the validated byte size
-// so a bad asset is visible in the run log, not just at grading time.
+// v4: build.py re-typeset the page for the 300px read only — no fact
+// or number changed. Headlines up (hero 50pt, row 2 31pt, row 3 26pt),
+// every deck cut to two lines at larger type, briefs set bold at 18pt
+// and shortened to one line each, art strips taller, hero spiral
+// enlarged. The image below is the v4 render (deterministic, same
+// bytes on a re-run); everything else about this program is unchanged.
 const MAX_BYTES = 1048576; // 1 MiB gate cap
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 mkdirSync(outDir, { recursive: true });

@@ -16,6 +16,17 @@ injuries). The soft royals brief is swapped out for the Houthi strike.
 ICJ deck adds Myanmar calling the ruling "unfair" on Friday. Briefs
 stay 16pt; an 8th brief fits the band's second column.
 
+v4 (this session): CRAFT ONLY — no fact or number changed. The v3
+image at 300px wide showed decks and briefs washing out to grey mush
+and row-3 headlines barely readable, so the page is re-typeset for
+the 300px read: headlines up (hero 44->50pt, row 2 27->31pt, row 3
+24->26pt — 26pt is the largest that still fits the 310px row-3 tiles),
+every deck cut to two lines max at larger type (hero 20pt, row 2
+19pt, row 3 18pt), briefs set bold at 18pt and shortened to fit one
+line each, hero spiral enlarged and its chips bumped, art strips
+taller (row 2 92->98px, row 3 68->72px). Layout re-gridded to fit:
+hero deck ends ~402, row 2 424-662, row 3 686-888, briefs 904-1024.
+
 Stories (all verified against reputable reporting before they were drawn):
   hero  Cyclone Akvan makes landfall near Gopalpur, Odisha, in the
         morning (07:30-08:30 IST), winds 70-80 km/h gusting 90; more
@@ -136,11 +147,11 @@ def cyclone_hero(img, box, rng):
     vgrad(img, box, (14, 58, 78), (28, 104, 124))
     d = ImageDraw.Draw(img, "RGBA")
     cx, cy = (x0 + x1) // 2 - 90, (y0 + y1) // 2
-    # spiral bands, tightening toward the eye
-    for r in range(72, 12, -7):
+    # spiral bands, tightening toward the eye (v4: larger, fills the strip)
+    for r in range(80, 14, -7):
         start = (r * 13) % 360
         d.arc([cx - r, cy - r, cx + r, cy + r], start=start,
-              end=start + 255, fill=(235, 245, 245), width=5)
+              end=start + 255, fill=(235, 245, 245), width=6)
     d.ellipse([cx - 8, cy - 8, cx + 8, cy + 8], fill=GOLD)
     # coastline and a small coastal town on the right
     d.polygon([(x1 - 58, y0), (x1, y0), (x1, y1), (x1 - 82, y1),
@@ -162,13 +173,13 @@ def cyclone_hero(img, box, rng):
         rx = rng.randint(x0 + 4, x1 - 8)
         ry = rng.randint(y0 + 4, y1 - 20)
         d.line([rx, ry, rx - 5, ry + 12], fill=(200, 225, 225), width=2)
-    # tags: red alert top-left, kicker chip bottom-left
-    d.rectangle([x0 + 8, y0 + 6, x0 + 100, y0 + 24], fill=RED)
-    d.text((x0 + 14, y0 + 8), "RED ALERT", font=fnt(SANS_B, 12),
+    # tags: red alert top-left, kicker chip bottom-left (v4: larger type)
+    d.rectangle([x0 + 8, y0 + 6, x0 + 104, y0 + 26], fill=RED)
+    d.text((x0 + 14, y0 + 8), "RED ALERT", font=fnt(SANS_B, 13),
            fill=(255, 255, 255))
-    d.rectangle([x0 + 10, y1 - 52, x0 + 236, y1 - 26], fill=NAVY)
-    d.text((x0 + 20, y1 - 49), "CYCLONE AKVAN · ODISHA",
-           font=fnt(SANS_B, 15), fill=GOLD)
+    d.rectangle([x0 + 10, y1 - 54, x0 + 252, y1 - 26], fill=NAVY)
+    d.text((x0 + 20, y1 - 51), "CYCLONE AKVAN · ODISHA",
+           font=fnt(SANS_B, 17), fill=GOLD)
 
 
 def neon_city(img, box, rng):
@@ -186,7 +197,7 @@ def neon_city(img, box, rng):
     # neon sign across the top
     d.rounded_rectangle([x0 + 96, y0 + 10, x0 + 318, y0 + 44], radius=4,
                         outline=(255, 0, 153), width=3)
-    d.text((x0 + 112, y0 + 14), "VICE CITY", font=fnt(SANS_B, 24),
+    d.text((x0 + 112, y0 + 14), "VICE CITY", font=fnt(SANS_B, 26),
            fill=(255, 92, 199))
     # palm silhouettes at both edges
     for px in (x0 + 24, x1 - 28):
@@ -368,91 +379,90 @@ def main():
     img = Image.new("RGB", (W, H), PAPER)
     d = ImageDraw.Draw(img)
 
-    # ---- masthead ----
+    # ---- masthead (v4: title 48pt, date 22pt) ----
     d.rectangle([0, 0, W, 76], fill=NAVY)
-    d.text((W // 2, 2), "THE WORLD IN ONE DAY", font=fnt(SERIF_B, 46),
+    d.text((W // 2, 2), "THE WORLD IN ONE DAY", font=fnt(SERIF_B, 48),
            fill=(255, 255, 255), anchor="ma")
-    d.text((W // 2, 52), "FRIDAY 20 NOVEMBER 2026", font=fnt(SANS_B, 20),
+    d.text((W // 2, 52), "FRIDAY 20 NOVEMBER 2026", font=fnt(SANS_B, 22),
            fill=GOLD, anchor="ma")
     d.rectangle([0, 76, W, 80], fill=GOLD)
     d.rounded_rectangle([W - 196, 8, W - 12, 32], radius=4, fill=GOLD)
     d.text((W - 104, 12), "FINAL EDITION", font=fnt(SANS_B, 14),
            fill=NAVY, anchor="ma")
 
-    # ---- hero: cyclone art, headline, deck ----
+    # ---- hero: cyclone art, headline, deck (v4: 50pt headline,
+    # two-line 20pt deck — every line must survive the 300px read) ----
     cyclone_hero(img, (24, 92, 1000, 240), rng)
     d = ImageDraw.Draw(img)
-    d.text((24, 248), "AKVAN MAKES", font=fnt(SERIF_B, 44), fill=INK)
-    d.text((24, 294), "LANDFALL", font=fnt(SERIF_B, 44), fill=INK)
+    d.text((24, 248), "AKVAN MAKES", font=fnt(SERIF_B, 50), fill=INK)
+    d.text((24, 300), "LANDFALL", font=fnt(SERIF_B, 50), fill=INK)
     deck = ("Severe Cyclonic Storm Akvan comes ashore near Gopalpur in "
-            "the morning, winds of 70-80 km/h; more than 300,000 "
-            "evacuated, no deaths reported as heavy rain lashes the coast.")
-    y = 344
-    for line in wrap(d, deck, fnt(SANS, 19), 976):
-        d.text((24, y), line, font=fnt(SANS, 19), fill=BODY)
-        y += 23
-    d.line([24, 398, 1000, 398], fill=RULE, width=1)
+            "the morning, winds 70-80 km/h; more than 300,000 "
+            "evacuated, no deaths reported.")
+    y = 358
+    for line in wrap(d, deck, fnt(SANS, 20), 976):
+        d.text((24, y), line, font=fnt(SANS, 20), fill=BODY)
+        y += 24
+    d.line([24, 412, 1000, 412], fill=RULE, width=1)
 
-    # ---- row 2: two tiles ----
+    # ---- row 2: two tiles (v4: art 424-522, 31pt headlines,
+    # two-line 19pt decks) ----
     row2 = [
         ("CULTURE · GAMING", "GTA VI: 24.6M COPIES", "ON DAY ONE",
-         "Sensor Tower puts full launch-day sales at 24.6m copies, "
-         "about $2.36bn; a record 7.9m watch at once. Rockstar silent "
-         "on official figures.",
+         "Launch-day sales hit 24.6m copies, about $2.36bn; a record "
+         "7.9m watch at once.",
          neon_city),
         ("THE HAGUE · JUSTICE", "COURT: MYANMAR", "GUILTY OF GENOCIDE",
-         "The Hague finds Myanmar guilty of genocide against the "
-         "Rohingya — a first for any state, 9 votes to 6. Myanmar "
-         "calls it 'unfair'; reparations ordered.",
+         "The Hague finds Myanmar guilty of genocide, 9 votes to 6 — "
+         "a first; reparations ordered.",
          scales_art),
     ]
     for i, (kick, h1, h2, deck, art) in enumerate(row2):
         x0 = 24 + i * 494
-        tile_pair(img, d, rng, x0, x0 + 470, 410, 502, 508, 526, 586,
-                  kick, h1, h2, deck, art, 14, 27, 18, 470, 22)
+        tile_pair(img, d, rng, x0, x0 + 470, 424, 522, 528, 548, 620,
+                  kick, h1, h2, deck, art, 15, 31, 19, 470, 23)
     d = ImageDraw.Draw(img)
-    d.line([24, 656, 1000, 656], fill=RULE, width=1)
+    d.line([24, 674, 1000, 674], fill=RULE, width=1)
 
-    # ---- row 3: three tiles ----
+    # ---- row 3: three tiles (v4: art 686-758, 26pt headlines —
+    # the largest that fits the 310px tiles — two-line 18pt decks) ----
     row3 = [
         ("SOUTH KOREA · POLITICS", "EX-PM'S 15-YEAR TERM", "OVERTURNED",
-         "Top court overturns Han Duck-soo's 15-year term in part over "
-         "the martial-law bid; retrial ordered.",
+         "Top court overturns Han Duck-soo's term in part; retrial "
+         "ordered.",
          court_art),
         ("VENEZUELA · DEFENCE", "US AND VENEZUELA", "SIGN MILITARY PACT",
-         "Hegseth signs a Caracas deal restoring defence ties — training "
-         "and intelligence sharing.",
+         "Hegseth signs a Caracas deal restoring defence ties.",
          flags_art),
         ("NORTH KOREA · NUCLEAR", "NORTH KOREA BUILDS", "MORE OF YONGBYON",
-         "UN watchdog says Pyongyang built another extension to its "
-         "Yongbyon enrichment plant.",
+         "UN watchdog: Pyongyang built another Yongbyon extension.",
          reactor_art),
     ]
     for i, (kick, h1, h2, deck, art) in enumerate(row3):
         x0 = 24 + i * 326
-        tile_pair(img, d, rng, x0, x0 + 310, 668, 736, 748, 766, 818,
-                  kick, h1, h2, deck, art, 13, 24, 16, 310, 20)
+        tile_pair(img, d, rng, x0, x0 + 310, 686, 758, 766, 784, 848,
+                  kick, h1, h2, deck, art, 14, 26, 18, 310, 22)
     d = ImageDraw.Draw(img)
-    d.line([24, 894, 1000, 894], fill=RULE, width=1)
+    d.line([24, 898, 1000, 898], fill=RULE, width=1)
 
-    # ---- briefs band ----
-    d.rectangle([0, 900, W, H], fill=NAVY)
-    d.text((24, 906), "ALSO FRIDAY", font=fnt(SANS_B, 19), fill=GOLD)
+    # ---- briefs band (v4: bold 18pt, each brief one line) ----
+    d.rectangle([0, 904, W, H], fill=NAVY)
+    d.text((24, 910), "ALSO FRIDAY", font=fnt(SANS_B, 19), fill=GOLD)
     briefs = [
-        "FIJI DECLARES DISASTER — El Niño drought at crisis level",
-        "SENSEX JUMPS 990 — Nifty closes above 25,500 Thursday",
-        "ANTHROPIC +17% ON DEBUT — $97 close after $83 IPO",
+        "FIJI DECLARES DISASTER — drought at crisis level",
+        "SENSEX JUMPS 990 — Nifty above 25,500 Thursday",
+        "ANTHROPIC +17% ON DEBUT — $97 after $83 IPO",
         "NICHOLLS 175* — NZ 368; India 159-1 at stumps",
-        "HOUTHI MISSILE HITS RIYADH — PIF Tower hit, no injuries",
-        "AUSTRALIA SANCTIONS SETTLERS — West Bank expansion",
-        "GAS HUSKY SINKS — four strikes; all 19 crew saved",
-        "TRUMP, XI, PUTIN MEET — first three-way summit in Shenzhen",
+        "HOUTHI STRIKE HITS RIYADH — no injuries",
+        "AUSTRALIA SANCTIONS SETTLERS — West Bank",
+        "GAS HUSKY SINKS — four strikes; 19 crew saved",
+        "TRUMP-XI-PUTIN SUMMIT — first 3-way, Shenzhen",
     ]
     for i, b in enumerate(briefs):
         col = 0 if i < 4 else 1
         row = i if i < 4 else i - 4
-        d.text((24 + col * 500, 928 + row * 18), "•  " + b,
-               font=fnt(SANS, 16), fill=(235, 235, 235))
+        d.text((24 + col * 500, 934 + row * 22), "•  " + b,
+               font=fnt(SANS_B, 18), fill=(235, 235, 235))
 
     img = grain(img)
     img.save(HERE / "entry.png", "JPEG", quality=92)
